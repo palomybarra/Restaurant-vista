@@ -1,0 +1,51 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Modelo;
+
+/**
+ *
+ * @author paloma
+ */
+public class Rol_Access_Model {
+    private int id_rol_access;
+    private String description;
+    private int id_rol;
+
+    public Rol_Access_Model() {
+    }
+
+    public Rol_Access_Model(int id_rol_access, String description, int id_rol) {
+        this.id_rol_access = id_rol_access;
+        this.description = description;
+        this.id_rol = id_rol;
+    }
+
+    public int getId_rol_access() {
+        return id_rol_access;
+    }
+
+    public void setId_rol_access(int id_rol_access) {
+        this.id_rol_access = id_rol_access;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getId_rol() {
+        return id_rol;
+    }
+
+    public void setId_rol(int id_rol) {
+        this.id_rol = id_rol;
+    }
+    
+    
+}
