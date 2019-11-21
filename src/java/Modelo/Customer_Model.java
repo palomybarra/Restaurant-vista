@@ -20,7 +20,7 @@ public class Customer_Model {
     private String address;
     private String phone;
     private String activity;
-    private Date Dob;
+    private String Dob;
     private int document_id;
     private char document_id_dv;
     private int id_commune;
@@ -31,7 +31,7 @@ public class Customer_Model {
     public Customer_Model() {
     }
 
-    public Customer_Model(int id_customer, String name, String last_name, String email, String address, String phone, String activity, Date Dob, int document_id, char document_id_dv, int id_commune, int id_country, int id_city, String password) {
+    public Customer_Model(int id_customer, String name, String last_name, String email, String address, String phone, String activity, String Dob, int document_id, char document_id_dv, int id_commune, int id_country, int id_city, String password) {
         this.id_customer = id_customer;
         this.name = name;
         this.last_name = last_name;
@@ -77,7 +77,7 @@ public class Customer_Model {
         return activity;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return Dob;
     }
 
@@ -141,7 +141,7 @@ public class Customer_Model {
         this.activity = activity;
     }
 
-    public void setDob(Date Dob) {
+    public void setDob(String Dob) {
         this.Dob = Dob;
     }
 

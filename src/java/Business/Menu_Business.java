@@ -19,7 +19,7 @@ public class Menu_Business {
     private String description;
     private int time_wait;
     private int price;
-    private int id_recipe;
+    private int type_location;
 
     public Menu_Business() {
     }
@@ -29,7 +29,7 @@ public class Menu_Business {
         this.description = description;
         this.time_wait = time_wait;
         this.price = price;
-        this.id_recipe = id_recipe;
+        this.type_location = id_recipe;
     }
 
     public int getId_Menu() {
@@ -48,8 +48,8 @@ public class Menu_Business {
         return price;
     }
 
-    public int getId_recipe() {
-        return id_recipe;
+    public int getType_location() {
+        return type_location;
     }
 
     public void setId_Menu(int id_Menu) {
@@ -68,8 +68,8 @@ public class Menu_Business {
         this.price = price;
     }
 
-    public void setId_recipe(int id_recipe) {
-        this.id_recipe = id_recipe;
+    public void setType_location(int type_location) {
+        this.type_location = type_location;
     }
     
     public ArrayList<Menu_Business> getMenu() {
@@ -82,7 +82,36 @@ public class Menu_Business {
                     menu.getDescription(),
                     menu.getTime_wait(),
                     menu.getPrice(),
-                    menu.getId_recipe()));
+                    menu.getType_location()));
+        }
+        return salida;
+    }
+    
+    public ArrayList<Menu_Business> getDrinks() {
+        ArrayList<Menu_Business> salida = new ArrayList<>();
+        MenuDAO dao = new MenuDAO();
+        ArrayList<Menu_Model> modelo = dao.getDrinks();
+        for (Menu_Model menu : modelo) {
+            salida.add(new Menu_Business(
+                    menu.getId_Menu(),
+                    menu.getDescription(),
+                    menu.getTime_wait(),
+                    menu.getPrice(),
+                    menu.getType_location()));
+        }
+        return salida;
+    }
+    public ArrayList<Menu_Business> getDesserts() {
+        ArrayList<Menu_Business> salida = new ArrayList<>();
+        MenuDAO dao = new MenuDAO();
+        ArrayList<Menu_Model> modelo = dao.getDesserts();
+        for (Menu_Model menu : modelo) {
+            salida.add(new Menu_Business(
+                    menu.getId_Menu(),
+                    menu.getDescription(),
+                    menu.getTime_wait(),
+                    menu.getPrice(),
+                    menu.getType_location()));
         }
         return salida;
     }

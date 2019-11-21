@@ -16,6 +16,14 @@
         <servlet-name>MenuServlet</servlet-name>
         <servlet-class>Controllers.MenuServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddCartServlet</servlet-name>
+        <servlet-class>Controllers.AddCartServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetCartServlet</servlet-name>
+        <servlet-class>Controllers.GetCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewCustomerServlet</servlet-name>
         <url-pattern>/NewCustomerServlet</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>MenuServlet</servlet-name>
         <url-pattern>/MenuServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCartServlet</servlet-name>
+        <url-pattern>/AddCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetCartServlet</servlet-name>
+        <url-pattern>/GetCartServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

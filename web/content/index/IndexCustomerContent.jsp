@@ -11,3 +11,4 @@
         
         <a href="EditSessionServlet">Editar</a>
         <a href="MenuServlet">Menu</a>
+        <a href="GetCartServlet">Mi Carrito</a>

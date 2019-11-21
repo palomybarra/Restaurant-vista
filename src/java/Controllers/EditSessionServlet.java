@@ -81,9 +81,8 @@ public class EditSessionServlet extends HttpServlet {
         cus.setLast_name(request.getParameter("txtLastName"));
         cus.setAddress(request.getParameter("txtAddress"));
         cus.setPhone(request.getParameter("txtPhone"));
-        try {
-            Date x = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("txtBirth"));
-            cus.setDob(x);
+        try {            
+            cus.setDob(request.getParameter("txtBirth"));
         } catch (Exception e) {
 
         }

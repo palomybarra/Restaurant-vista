@@ -16,7 +16,7 @@ public class Menu_Model {
     private String description;
     private int time_wait;
     private int price;
-    private int id_recipe;
+    private int type_location;
 
     public Menu_Model() {
     }
@@ -26,7 +26,7 @@ public class Menu_Model {
         this.description = description;
         this.time_wait = time_wait;
         this.price = price;
-        this.id_recipe = id_recipe;
+        this.type_location = id_recipe;
     }
 
     public int getId_Menu() {
@@ -45,8 +45,8 @@ public class Menu_Model {
         return price;
     }
 
-    public int getId_recipe() {
-        return id_recipe;
+    public int getType_location() {
+        return type_location;
     }
 
     public void setId_Menu(int id_Menu) {
@@ -65,8 +65,8 @@ public class Menu_Model {
         this.price = price;
     }
 
-    public void setId_recipe(int id_recipe) {
-        this.id_recipe = id_recipe;
+    public void setType_location(int type_location) {
+        this.type_location = type_location;
     }
     
     

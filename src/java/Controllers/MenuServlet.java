@@ -49,6 +49,8 @@ public class MenuServlet extends HttpServlet {
         processRequest(request, response);
         Menu_Business bus=new Menu_Business();
         request.setAttribute("lista", bus.getMenu());
+        request.setAttribute("Drinks", bus.getDrinks());
+        request.setAttribute("Desserts", bus.getDesserts());
         request.getRequestDispatcher("/page/Menu.jsp").forward(request, response);
         
     }
