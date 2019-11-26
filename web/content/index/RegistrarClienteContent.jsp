@@ -1,3 +1,7 @@
+<%@page import="Business.City_Business"%>
+<%@page import="java.util.ArrayList"%>
+<%ArrayList<City_Business> lista = (ArrayList<City_Business>) request.getAttribute("lista");%>
+
 <div class="container">
     <div class="row">
         <div class="col-2">
@@ -84,9 +88,10 @@
                             <td width="45%">
                                 <div class="form-group">
                                     <label for="ddCity">Ciudad</label>
-                                    <select name="ddCity" id="ddCity" class="form-control">
-                                        <option value="1">Santiago</option>
-                                        <option value="2">Concepcion</option>       
+                                    <select name="ddCity" id="ddCity" class="form-control">                                        
+                                        <% for (City_Business al : lista) {
+                                            out.print("<option value=" +al.getId_city()+">"+al.getDescription()+"</option>");
+                                        }%>      
                                     </select>
                                 </div>
                             </td>

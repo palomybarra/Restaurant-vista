@@ -1,3 +1,9 @@
+<%-- 
+    Document   : PayContent
+    Created on : 21-nov-2019, 13:48:43
+    Author     : paloma
+--%>
+
 <%@page import="Business.CartBusiness"%>
 <%@page import="Business.Menu_Business"%>
 <%@page import="java.util.ArrayList"%>
@@ -39,17 +45,9 @@
                     out.print(al.getQty());                                            
                     out.print("</td><td>");
                     out.print(al.calculaTotal());     
-                    out.print("</td>");
+                    out.print("</td><td>");
                     out.print("</tr>");
                 }
-            out.print("<tr>");
-            out.print("<td>");
-            out.print("<h6>TOTAL</h6>");
-            out.print("</td><td>");
-            CartBusiness bus=new CartBusiness();
-            out.print("<h6>"+bus.totalFinal(lista)+"</h6>");
-            out.print("</td>");
-            out.print("</tr>");
         }%>
   </table>
   </div>

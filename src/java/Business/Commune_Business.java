@@ -5,6 +5,11 @@
  */
 package Business;
 
+import DAO.CommuneDAO;
+import Modelo.City_Model;
+import Modelo.Commune_Model;
+import java.util.ArrayList;
+
 
 
 /**
@@ -49,6 +54,19 @@ public class Commune_Business {
         this.id_city = id_city;
     }
     
+     public ArrayList<Commune_Business> getCommune() {
+        ArrayList<Commune_Business> salida = new ArrayList<>();
+        CommuneDAO dao = new CommuneDAO();
+        ArrayList<Commune_Model> modelo = dao.getCommune(this.id_city);
+        for (Commune_Model model : modelo) {
+            salida.add(new Commune_Business(
+                    model.getId_commune(),
+                    model.getDescription(),
+                    model.getId_city()
+            ));
+        }
+        return salida;
+    }
     
     
 }

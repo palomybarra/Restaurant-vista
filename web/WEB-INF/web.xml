@@ -24,6 +24,18 @@
         <servlet-name>GetCartServlet</servlet-name>
         <servlet-class>Controllers.GetCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CommandServlet</servlet-name>
+        <servlet-class>Controllers.CommandServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>tableServlet</servlet-name>
+        <servlet-class>Controllers.tableServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchTable</servlet-name>
+        <servlet-class>Controllers.SearchTable</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewCustomerServlet</servlet-name>
         <url-pattern>/NewCustomerServlet</url-pattern>
@@ -47,6 +59,18 @@
     <servlet-mapping>
         <servlet-name>GetCartServlet</servlet-name>
         <url-pattern>/GetCartServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommandServlet</servlet-name>
+        <url-pattern>/CommandServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>tableServlet</servlet-name>
+        <url-pattern>/tableServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchTable</servlet-name>
+        <url-pattern>/SearchTable</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

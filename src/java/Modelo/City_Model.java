@@ -11,12 +11,12 @@ package Modelo;
  */
 public class City_Model {
     private int id_city;
-    private int description;
+    private String description;
 
     public City_Model() {
     }
 
-    public City_Model(int id_city, int description) {
+    public City_Model(int id_city, String description) {
         this.id_city = id_city;
         this.description = description;
     }
@@ -29,11 +29,11 @@ public class City_Model {
         this.id_city = id_city;
     }
 
-    public int getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(int description) {
+    public void setDescription(String description) {
         this.description = description;
     }
     

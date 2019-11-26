@@ -5,7 +5,9 @@
  */
 package Business;
 
+import DAO.Restaurant_TableDAO;
 import Modelo.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -59,7 +61,19 @@ public class Restaurant_table_Business {
         this.qty = qty;
     }
     
-    
+     public ArrayList<Restaurant_table_Business> getTable() {
+        ArrayList<Restaurant_table_Business> salida = new ArrayList<>();
+        Restaurant_TableDAO dao = new Restaurant_TableDAO();
+        ArrayList<Restaurant_table_Model> modelo = dao.getTable(this.qty);
+        for (Restaurant_table_Model mdel : modelo) {
+            salida.add(new Restaurant_table_Business(
+                    mdel.getId_Restaurant_table(),
+                    mdel.getDescription(),
+                    mdel.getId_table_state(),
+                    mdel.getQty()));
+        }
+        return salida;
+    }
     
     
 }

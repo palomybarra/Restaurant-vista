@@ -120,4 +120,15 @@ public class CartBusiness {
         int total=this.price*this.qty;
         return total;
     }
+    
+    public int totalFinal(ArrayList<CartBusiness> lista)
+    {
+        int total=0;
+        for (CartBusiness al : lista) 
+        {
+            total= total+al.calculaTotal();
+        }
+        
+        return total;
+    }
 }

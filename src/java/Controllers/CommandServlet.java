@@ -5,16 +5,9 @@
  */
 package Controllers;
 
-import Business.City_Business;
-import Business.Customer_Business;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author paloma
  */
-public class NewCustomerServlet extends HttpServlet {
+public class CommandServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,7 +30,7 @@ public class NewCustomerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,14 +45,7 @@ public class NewCustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);        
-        City_Business city= new City_Business();
-        //city.setId_city(Integer.parseInt(request.getParameter("ddCommune")));
-        //request.setAttribute("lista", city.getCity());
-        request.getRequestDispatcher("/page/RegistrarCliente.jsp").forward(request, response);
-        
-        
-        
+        processRequest(request, response);
     }
 
     /**
@@ -74,29 +60,6 @@ public class NewCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        Customer_Business cus = new Customer_Business();
-        cus.setEmail(request.getParameter("txtmail"));
-        cus.setDocument_id(Integer.parseInt(request.getParameter("txtCardid")));
-        cus.setDocument_id_dv(request.getParameter("txtCardiddv").charAt(0));        
-        cus.setName(request.getParameter("txtName"));
-        cus.setLast_name(request.getParameter("txtLastName"));
-        cus.setPhone(request.getParameter("txtPhone"));
-        cus.setDob(request.getParameter("txtBirth"));
-        cus.setAddress(request.getParameter("txtAddress"));
-        cus.setId_city(Integer.parseInt(request.getParameter("ddCity")));
-        cus.setId_commune(Integer.parseInt(request.getParameter("ddCommune")));
-        cus.setId_country(Integer.parseInt(request.getParameter("ddNationality")));
-        cus.setPassword(request.getParameter("txtPass"));
-        boolean answer = cus.addCustomer(cus);
-        LOGGER.log(Level.INFO,"cus.addCustomer(cus);  " + cus.addCustomer(cus));
-        if (answer) {
-            request.setAttribute("mensaje", "Cliente ingresado");
-        } else {
-            request.setAttribute("mensaje", "Cliente existente");
-        }
-        request.getRequestDispatcher("/page/RegistrarCliente.jsp").forward(request, response);
-        
-
     }
 
     /**

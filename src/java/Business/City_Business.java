@@ -5,6 +5,10 @@
  */
 package Business;
 
+import DAO.CityDAO;
+import Modelo.City_Model;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -12,12 +16,12 @@ package Business;
  */
 public class City_Business {
     private int id_city;
-    private int description;
+    private String description;
 
     public City_Business() {
     }
 
-    public City_Business(int id_city, int description) {
+    public City_Business(int id_city, String description) {
         this.id_city = id_city;
         this.description = description;
     }
@@ -30,14 +34,25 @@ public class City_Business {
         this.id_city = id_city;
     }
 
-    public int getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(int description) {
+    public void setDescription(String description) {
         this.description = description;
     }
     
-    
+    public ArrayList<City_Business> getCity() {
+        ArrayList<City_Business> salida = new ArrayList<>();
+        CityDAO dao = new CityDAO();
+        ArrayList<City_Model> modelo = dao.getCity();
+        for (City_Model model : modelo) {
+            salida.add(new City_Business(
+                    model.getId_city(),
+                    model.getDescription()
+            ));
+        }
+        return salida;
+    }
     
 }

@@ -17,8 +17,8 @@ public class Order_Command_Model{
     private int id_menu;
     private int id_customer;
     private int person;
-    private Date date;
-    private Date time;
+    private String date;
+    private String time;
     private int is_paid_out;
     private int id_order_command_state;
     private int id_restaurant_table;
@@ -27,7 +27,7 @@ public class Order_Command_Model{
     public Order_Command_Model() {
     }
 
-    public Order_Command_Model(int id_order_command, int id_order, int id_menu, int id_customer, int person, Date date, Date time, int is_paid_out, int id_order_command_state, int id_restaurant_table, int id_sale_detail) {
+    public Order_Command_Model(int id_order_command, int id_order, int id_menu, int id_customer, int person, String date, String time, int is_paid_out, int id_order_command_state, int id_restaurant_table, int id_sale_detail) {
         this.id_order_command = id_order_command;
         this.id_order = id_order;
         this.id_menu = id_menu;
@@ -81,19 +81,19 @@ public class Order_Command_Model{
         this.person = person;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
