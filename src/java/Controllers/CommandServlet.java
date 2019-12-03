@@ -5,12 +5,17 @@
  */
 package Controllers;
 
+import Business.CartBusiness;
+import Business.Order_Command_Business;
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,7 +35,7 @@ public class CommandServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,6 +51,22 @@ public class CommandServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        Order_Command_Business bus=new Order_Command_Business();      
+        HttpSession session = request.getSession(); 
+        int idcustomer=(int)(session.getAttribute("id"));
+        int idmesa=(int)(session.getAttribute("mesa"));
+        int idsale=(int)(session.getAttribute("venta"));       
+        bus.setId_customer(idcustomer);
+        bus.setId_restaurant_table(idmesa);
+        bus.setId_sale(idsale);
+        bus.addCommand(bus);
+        idsale=bus.getId_sale();
+        session.setAttribute("venta", idsale);
+        request.setAttribute("comanda", bus.getCommand());
+       
+        request.getRequestDispatcher("/page/Comand.jsp").forward(request, response);
+
     }
 
     /**

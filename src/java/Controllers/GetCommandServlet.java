@@ -5,7 +5,7 @@
  */
 package Controllers;
 
-import Business.Restaurant_table_Business;
+import Business.Order_Command_Business;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author paloma
  */
-public class tableServlet extends HttpServlet {
+public class GetCommandServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,8 +49,18 @@ public class tableServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        request.getRequestDispatcher("/page/SelectTable.jsp").forward(request, response);
+        Order_Command_Business bus=new Order_Command_Business();      
+        HttpSession session = request.getSession(); 
+        int idsale=(int)(session.getAttribute("venta")); 
+        if(idsale==0)
+        {
+            request.setAttribute("mensaje", "No ha realizado pedido aún");
+        }
+        bus.setId_sale(idsale);
+        request.setAttribute("lcomanda", bus.getCommand());
+        request.getRequestDispatcher("/page/ComandaFinal.jsp").forward(request, response);
 
+        
     }
 
     /**
@@ -65,11 +75,7 @@ public class tableServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        Restaurant_table_Business bus = new Restaurant_table_Business();
-        bus.setId_Restaurant_table(Integer.parseInt(request.getParameter("ddMesa")));
-        HttpSession session= request.getSession();
-        session.setAttribute("mesa", bus.getId_Restaurant_table());
-        response.sendRedirect("MenuServlet");
+        request.getRequestDispatcher("/page/Pay.jsp").forward(request, response);
 
     }
 

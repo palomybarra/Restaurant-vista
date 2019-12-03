@@ -4,9 +4,10 @@
     Author     : paloma
 --%>
 
-<%@page import="Business.CartBusiness"%>
-<%@page import="Business.Menu_Business"%>
+<%@page import="Business.Order_Command_Business"%>
 <%@page import="java.util.ArrayList"%>
+
+<%{ ArrayList<Order_Command_Business> lista = (ArrayList<Order_Command_Business>) request.getAttribute("comanda");%>
 <div id="container">
     <header>
         <nav>
@@ -14,42 +15,50 @@
                 <li><a href="index.jsp" class="current"><i class="fas fa-home"></i></a></li>
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                 <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+
                 <li><a href="MenuServlet">Menú</a></li>
+                <li><a href="GetCartServlet">Pedir</a></li>
+                <li><a href="GetCommandServlet">Carrito</a></li>
                 <li><a href="EditSessionServlet">Perfil</a></li>
-                <li><a href="GetCartServlet">Mi Carrito</a></li>
             </ul>
         </nav>
     </header>
     <!-- First Container -->
-    <div class="wrapper">
-     
-    <table class="table">
-    <thead>
-      <tr>
-        <th>Pedido</th>
-        <th>Cantidad</th>
-        <th>total</th>
-      </tr>
-    </thead>
-    <tbody>
-        <%{
-            ArrayList<CartBusiness> lista = (ArrayList<CartBusiness>) request.getAttribute("lista");
-            for (CartBusiness al : lista) {
+    <%      if (lista.size() == 0) {
+                out.print("<h6> Aún no haz agregado nada desde el Menú</h6>");
+            } else {
+                out.print("<h6> Pedido Realizado </h6>");
+                out.print("<table class='table'>");
+                out.print("<thead>");
+                out.print(" <tr>");
+                out.print("<th>Cantidad</th>");
+                out.print("<th>Producto</th>");
+                out.print(" <th>Valor Unitario</th>");
+                out.print("</tr>");
+                out.print("</thead>");
+                out.print("<tbody>");
+
+                for (Order_Command_Business al : lista) {
                     out.print("<tr>");
                     out.print("<td>");
-                    out.print(al.getDescription());                    
+                    out.print(al.getCantidad());
                     out.print("</td><td>");
-                    out.print(al.getQty());                                            
+                    out.print(al.getDescription());
                     out.print("</td><td>");
-                    out.print(al.calculaTotal());     
-                    out.print("</td><td>");
+                    out.print(al.getPrice());
+                    out.print("</td>");
                     out.print("</tr>");
                 }
+                out.print("<tr>");
+                out.print("<td>");
+                out.print("<h6>TOTAL</h6>");
+                out.print("</td><td>");
+
+                out.print("</td>");
+                out.print("</tr>");
+                out.print("</table> ");
+            }
         }%>
-  </table>
-  </div>
-  <div class='left menu-order'><a class='button' href="MenuServlet">Volver</a></div>
-  <div class='rigt menu-order'><a class='button' href="CommandServlet">Realizar orden</a></div>
+
+    <div class='left menu-order'><a class='button' href="PayServlet">Ir a pagar</a></div>
+    <div class='rigt menu-order'><a class='button' href="MenuServlet">Pedir mas</a></div>

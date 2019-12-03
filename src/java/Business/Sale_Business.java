@@ -5,6 +5,8 @@
  */
 package Business;
 
+import DAO.SaleDAO;
+import Modelo.Sale_Model;
 import java.util.Date;
 
 /**
@@ -17,14 +19,14 @@ public class Sale_Business {
     private int tax_amount;
     private int total_amount;
     private Date sale_date;
-    private Date time_date;
+    private String time_date;
     private int customer_id_customer;
     private int payment_id_payment;
 
     public Sale_Business() {
     }
 
-    public Sale_Business(int id_sale, int net_amount, int tax_amount, int total_amount, Date sale_date, Date time_date, int customer_id_customer, int payment_id_payment) {
+    public Sale_Business(int id_sale, int net_amount, int tax_amount, int total_amount, Date sale_date, String time_date, int customer_id_customer, int payment_id_payment) {
         this.id_sale = id_sale;
         this.net_amount = net_amount;
         this.tax_amount = tax_amount;
@@ -75,11 +77,11 @@ public class Sale_Business {
         this.sale_date = sale_date;
     }
 
-    public Date getTime_date() {
+    public String getTime_date() {
         return time_date;
     }
 
-    public void setTime_date(Date time_date) {
+    public void setTime_date(String time_date) {
         this.time_date = time_date;
     }
 
@@ -99,5 +101,16 @@ public class Sale_Business {
         this.payment_id_payment = payment_id_payment;
     }
     
+    public boolean addSale(Sale_Business x) {
+
+        try {
+            Sale_Model model = new Sale_Model(x.getId_sale(),x.getNet_amount(),x.getTax_amount(),x.getTotal_amount(),x.getSale_date(),x.getTime_date(),x.getCustomer_id_customer(),x.getPayment_id_payment());
+            SaleDAO dao = new SaleDAO();
+            return dao.addSale(model);
+        } catch (Exception e) {
+            return false;
+        }
+    }
     
+   
 }

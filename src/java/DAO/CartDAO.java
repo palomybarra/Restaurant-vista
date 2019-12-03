@@ -54,6 +54,71 @@ public class CartDAO {
             return false;
         }
     }
+    
+     public boolean deleteCart(CartModel cart) 
+    {
+
+        String fn = "{?=call erestaurant.FN_DELETE_ITEM_CART(?,?)}";
+        try 
+        {
+            CallableStatement cs = DbConnection.getConnection().prepareCall(fn);
+            cs.registerOutParameter(1, Types.INTEGER);
+            cs.setInt(2, cart.getId_menu());
+            cs.setInt(3, cart.getCustomer_id());                         
+
+            //LOGGER.log(Level.INFO, "dv;  " + Character.toString(customer.getDocument_id_dv()));
+            cs.execute();
+
+
+            int result = cs.getInt(1);
+
+            if (result == 1)
+            {
+                return true;
+            } else {
+                return false;
+            }
+            
+        } catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        
+    }
+     public boolean updateCart(CartModel cart) 
+    {
+
+        String fn = "{?=call erestaurant.FN_UPDATE_ITEM_CART(?,?,?)}";
+        try 
+        {
+            CallableStatement cs = DbConnection.getConnection().prepareCall(fn);
+            cs.registerOutParameter(1, Types.INTEGER);
+            cs.setInt(2, cart.getId_menu());
+            cs.setInt(3, cart.getCustomer_id());                         
+            cs.setInt(4, cart.getQty());                         
+
+            //LOGGER.log(Level.INFO, "dv;  " + Character.toString(customer.getDocument_id_dv()));
+            cs.execute();
+
+
+            int result = cs.getInt(1);
+
+            if (result == 1)
+            {
+                return true;
+            } else {
+                return false;
+            }
+            
+        } catch (SQLException e) 
+        {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        
+    }
+    
     public ArrayList<CartModel> getCart(int id_customer) {
         ArrayList<CartModel> salida = new ArrayList<>();
         String query = "SELECT * FROM VIEW_GET_CART WHERE CUSTOMER_ID="+id_customer;
@@ -76,4 +141,5 @@ public class CartDAO {
         }
         return salida;
     }
+   
 }

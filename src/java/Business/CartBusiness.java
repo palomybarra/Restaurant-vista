@@ -99,6 +99,29 @@ public class CartBusiness {
             return false;
         }
     }
+    
+     public boolean deleteCart(CartBusiness x) {
+
+        try {
+            CartModel model = new CartModel(x.getCart_id(),x.getCustomer_id(),x.getQty(),x.getId_menu(),x.getDescription(),x.getPrice());
+            CartDAO dao = new CartDAO();
+            return dao.deleteCart(model);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+     public boolean updateCart(CartBusiness x) {
+
+        try {
+            CartModel model = new CartModel(x.getCart_id(),x.getCustomer_id(),x.getQty(),x.getId_menu(),x.getDescription(),x.getPrice());
+            CartDAO dao = new CartDAO();
+            return dao.updateCart(model);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+     
      public ArrayList<CartBusiness> getCart() {
         ArrayList<CartBusiness> salida = new ArrayList<>();
         CartDAO dao = new CartDAO();

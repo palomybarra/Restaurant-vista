@@ -22,12 +22,16 @@ public class Order_Command_Model{
     private int is_paid_out;
     private int id_order_command_state;
     private int id_restaurant_table;
-    private int id_sale_detail;
+    private int id_sale;
+    private int cantidad;
+    private int price;
+    private String description;
 
     public Order_Command_Model() {
     }
 
-    public Order_Command_Model(int id_order_command, int id_order, int id_menu, int id_customer, int person, String date, String time, int is_paid_out, int id_order_command_state, int id_restaurant_table, int id_sale_detail) {
+    public Order_Command_Model(int id_order_command, int id_order, int id_menu, int id_customer, int person, String date, String time, int is_paid_out, int id_order_command_state, int id_restaurant_table, int id_sale_detail,
+    int cantidad) {
         this.id_order_command = id_order_command;
         this.id_order = id_order;
         this.id_menu = id_menu;
@@ -38,7 +42,8 @@ public class Order_Command_Model{
         this.is_paid_out = is_paid_out;
         this.id_order_command_state = id_order_command_state;
         this.id_restaurant_table = id_restaurant_table;
-        this.id_sale_detail = id_sale_detail;
+        this.id_sale = id_sale_detail;
+        this.cantidad=cantidad;
     }
 
     public int getId_order_command() {
@@ -121,12 +126,36 @@ public class Order_Command_Model{
         this.id_restaurant_table = id_restaurant_table;
     }
 
-    public int getId_sale_detail() {
-        return id_sale_detail;
+    public int getId_sale() {
+        return id_sale;
     }
 
-    public void setId_sale_detail(int id_sale_detail) {
-        this.id_sale_detail = id_sale_detail;
+    public void setId_sale(int id_sale) {
+        this.id_sale = id_sale;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     

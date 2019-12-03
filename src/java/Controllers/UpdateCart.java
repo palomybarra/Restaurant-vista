@@ -5,20 +5,19 @@
  */
 package Controllers;
 
-import Business.Restaurant_table_Business;
+import Business.CartBusiness;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author paloma
  */
-public class tableServlet extends HttpServlet {
+public class UpdateCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +31,6 @@ public class tableServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         
     }
 
@@ -49,8 +47,21 @@ public class tableServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        request.getRequestDispatcher("/page/SelectTable.jsp").forward(request, response);
-
+        int cust = Integer.parseInt(request.getParameter("cust"));
+        int menu=Integer.parseInt(request.getParameter("menu"));
+        int op=Integer.parseInt(request.getParameter("op"));
+        CartBusiness cart=new CartBusiness();
+        cart.setCustomer_id(cust);
+        cart.setId_menu(menu);
+        cart.setQty(op);        
+        boolean answer = cart.updateCart(cart);
+        //LOGGER.log(Level.INFO,"cus.addCustomer(cus);  " + cus.addCustomer(cus));
+        if (answer) {
+            request.setAttribute("mensaje", "actualizado");
+        } else {
+            request.setAttribute("mensaje", "sucedio algo :C");
+        }
+        request.getRequestDispatcher("GetCartServlet").forward(request, response);
     }
 
     /**
@@ -65,12 +76,6 @@ public class tableServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        Restaurant_table_Business bus = new Restaurant_table_Business();
-        bus.setId_Restaurant_table(Integer.parseInt(request.getParameter("ddMesa")));
-        HttpSession session= request.getSession();
-        session.setAttribute("mesa", bus.getId_Restaurant_table());
-        response.sendRedirect("MenuServlet");
-
     }
 
     /**

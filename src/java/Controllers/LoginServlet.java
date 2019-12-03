@@ -89,6 +89,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("id",cus.getId_customer());
                 session.setAttribute("name", cus.getName());
                 session.setAttribute("lname", cus.getLast_name());
+                session.setAttribute("venta", 0);
                 request.getRequestDispatcher("/page/IndexCustomer.jsp").forward(request, response);
                 //request.setAttribute("mensaje", "Autenticacion correcta");
                 

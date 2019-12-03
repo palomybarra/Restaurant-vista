@@ -5,7 +5,7 @@
  */
 package Controllers;
 
-import Business.Restaurant_table_Business;
+import Business.Sale_Business;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author paloma
  */
-public class tableServlet extends HttpServlet {
+public class PayServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,9 +31,8 @@ public class tableServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,8 +47,8 @@ public class tableServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        request.getRequestDispatcher("/page/SelectTable.jsp").forward(request, response);
+        processRequest(request, response);        
+        request.getRequestDispatcher("/page/Pay.jsp").forward(request, response);
 
     }
 
@@ -65,11 +64,36 @@ public class tableServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        Restaurant_table_Business bus = new Restaurant_table_Business();
-        bus.setId_Restaurant_table(Integer.parseInt(request.getParameter("ddMesa")));
-        HttpSession session= request.getSession();
-        session.setAttribute("mesa", bus.getId_Restaurant_table());
-        response.sendRedirect("MenuServlet");
+              
+       
+        HttpSession session = request.getSession(); 
+        int idsale=(int)(session.getAttribute("venta")); 
+        if(idsale==0)
+        {
+            request.setAttribute("mensaje", "No ha realizado pedido aún");
+        }
+        Sale_Business bus=new Sale_Business();
+        bus.setId_sale(idsale);  
+        
+        String value = request.getParameter("tipo_attach");
+        int radio_value;
+
+        if ("2".equals(value))
+        {
+            radio_value = 2;
+        }
+        else
+        {
+            radio_value = 3;
+        }
+       
+        bus.setPayment_id_payment(radio_value);
+        if(bus.addSale(bus))
+            request.setAttribute("mensaje", "Pagado");
+        else
+            request.setAttribute("mensaje", "Juiste wenaa");         
+        
+        request.getRequestDispatcher("/page/PagoFinal.jsp").forward(request, response);
 
     }
 
