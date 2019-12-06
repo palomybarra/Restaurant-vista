@@ -5,9 +5,11 @@
  */
 package Controllers;
 
+import Business.Order_Command_Business;
 import Business.Sale_Business;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -73,6 +75,8 @@ public class PayServlet extends HttpServlet {
             request.setAttribute("mensaje", "No ha realizado pedido aún");
         }
         Sale_Business bus=new Sale_Business();
+        Order_Command_Business com=new Order_Command_Business();
+        com.setId_sale(idsale);
         bus.setId_sale(idsale);  
         
         String value = request.getParameter("tipo_attach");
@@ -87,12 +91,12 @@ public class PayServlet extends HttpServlet {
             radio_value = 3;
         }
        
-        bus.setPayment_id_payment(radio_value);
-        if(bus.addSale(bus))
-            request.setAttribute("mensaje", "Pagado");
-        else
-            request.setAttribute("mensaje", "Juiste wenaa");         
-        
+        bus.setPayment_id_payment(radio_value);        
+        bus.addSale(bus);      
+        ArrayList lista=com.getCommandPay();
+        session.setAttribute("pago", radio_value);
+        request.setAttribute("lcomanda", lista);
+        session.setAttribute("venta", 0);        
         request.getRequestDispatcher("/page/PagoFinal.jsp").forward(request, response);
 
     }

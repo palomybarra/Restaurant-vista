@@ -3,18 +3,22 @@
     Created on : 02-dic-2019, 15:44:26
     Author     : paloma
 --%>
+<%@page import="Business.Restaurant_table_Business"%>
 <header>
         <nav>
             <ul id="nav">
-                <li><a href="index.jsp" class="current"><i class="fas fa-home"></i></a></li>
-                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                
-                <li><a href="MenuServlet">Menú</a></li>
+                  <li><a href="#" class="current"><i class="fas fa-home"></i></a></li>
+                <%
+                    if(session.getAttribute("mesa")!=null){
+                    out.print("<li><a href='MenuServlet'>Menú</a></li>");}
+                    else
+                    {
+                    out.print("<li><a href='tableServlet'>Menú</a></li>");}
+                %>
                 <li><a href="GetCartServlet">Pedir</a></li>
                 <li><a href="GetCommandServlet">Carrito</a></li>
                 <li><a href="EditSessionServlet">Perfil</a></li>
-                
+                <li><a href="Logout">Cerrar Sesion</a></li>                
             </ul>
         </nav>
     </header>

@@ -132,7 +132,8 @@ public class CartDAO {
                         rs.getInt("QTY"),
                         rs.getInt("ID_MENU"),
                         rs.getString("DESCRIPTION"),
-                        rs.getInt("PRICE")
+                        rs.getInt("PRICE"),
+                        rs.getInt("TIME_WAIT")
                 ));
             }
 

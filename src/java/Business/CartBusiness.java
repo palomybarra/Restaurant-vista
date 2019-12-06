@@ -22,6 +22,7 @@ public class CartBusiness {
     private int id_menu;
     private String description;
     private int price;
+    private int time_wait;
 
     public CartBusiness() {
     }
@@ -33,6 +34,14 @@ public class CartBusiness {
         this.id_menu = id_menu;
         this.description = description;
         this.price = price;
+    }
+
+    public int getTime_wait() {
+        return time_wait;
+    }
+
+    public void setTime_wait(int time_wait) {
+        this.time_wait = time_wait;
     }
 
     
@@ -92,7 +101,7 @@ public class CartBusiness {
      public boolean addCart(CartBusiness x) {
 
         try {
-            CartModel model = new CartModel(x.getCart_id(),x.getCustomer_id(),x.getQty(),x.getId_menu(),x.getDescription(),x.getPrice());
+            CartModel model = new CartModel(x.getCart_id(),x.getCustomer_id(),x.getQty(),x.getId_menu(),x.getDescription(),x.getPrice(),x.getTime_wait());
             CartDAO dao = new CartDAO();
             return dao.addCart(model);
         } catch (Exception e) {
@@ -103,7 +112,7 @@ public class CartBusiness {
      public boolean deleteCart(CartBusiness x) {
 
         try {
-            CartModel model = new CartModel(x.getCart_id(),x.getCustomer_id(),x.getQty(),x.getId_menu(),x.getDescription(),x.getPrice());
+            CartModel model = new CartModel(x.getCart_id(),x.getCustomer_id(),x.getQty(),x.getId_menu(),x.getDescription(),x.getPrice(),x.getTime_wait());
             CartDAO dao = new CartDAO();
             return dao.deleteCart(model);
         } catch (Exception e) {
@@ -114,7 +123,7 @@ public class CartBusiness {
      public boolean updateCart(CartBusiness x) {
 
         try {
-            CartModel model = new CartModel(x.getCart_id(),x.getCustomer_id(),x.getQty(),x.getId_menu(),x.getDescription(),x.getPrice());
+            CartModel model = new CartModel(x.getCart_id(),x.getCustomer_id(),x.getQty(),x.getId_menu(),x.getDescription(),x.getPrice(),x.getTime_wait());
             CartDAO dao = new CartDAO();
             return dao.updateCart(model);
         } catch (Exception e) {
@@ -153,5 +162,17 @@ public class CartBusiness {
         }
         
         return total;
+    }
+    public int getTime(ArrayList<CartBusiness> lista)
+    {
+        int time=0;
+        for (CartBusiness al : lista) 
+        {
+           if (al.getTime_wait()>time)
+               time=al.getTime_wait();
+        }
+        time=time+5;
+        
+        return time;
     }
 }

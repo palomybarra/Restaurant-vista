@@ -6,6 +6,7 @@
 package Controllers;
 
 import Business.CartBusiness;
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.logging.Level;
 
 /**
  *
@@ -52,7 +55,9 @@ public class GetCartServlet extends HttpServlet {
         int idcustomer=(int)(session.getAttribute("id"));
         CartBusiness cart= new CartBusiness();
         cart.setCustomer_id(idcustomer);
-        request.setAttribute("lista", cart.getCart());
+        ArrayList<CartBusiness> lista= cart.getCart();      
+        //LOGGER.log(Level.INFO, "time;  " +time);
+        request.setAttribute("lista", lista);
         request.getRequestDispatcher("/page/Cart.jsp").forward(request, response);
         
     }

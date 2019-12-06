@@ -16,18 +16,20 @@ public class CartModel {
     private int id_menu;
     private String description;
     private int price;
+    private int time_wait;
     
 
     public CartModel() {
     }
 
-    public CartModel(int cart_id, int customer_id, int qty, int id_menu, String description, int price) {
+    public CartModel(int cart_id, int customer_id, int qty, int id_menu, String description, int price, int time_wait) {
         this.cart_id = cart_id;
         this.customer_id = customer_id;
         this.qty = qty;
         this.id_menu = id_menu;
         this.description = description;
         this.price = price;
+        this.time_wait=time_wait;
     }
 
     
@@ -79,6 +81,16 @@ public class CartModel {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public int getTime_wait() {
+        return time_wait;
+    }
+
+    public void setTime_wait(int time_wait) {
+        this.time_wait = time_wait;
+    }
+    
+    
     
     
 }

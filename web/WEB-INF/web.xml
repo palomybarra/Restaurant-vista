@@ -52,6 +52,18 @@
         <servlet-name>UpdateCart</servlet-name>
         <servlet-class>Controllers.UpdateCart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>Controllers.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>Controllers.index</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PDF</servlet-name>
+        <servlet-class>Controllers.PDF</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewCustomerServlet</servlet-name>
         <url-pattern>/NewCustomerServlet</url-pattern>
@@ -103,6 +115,18 @@
     <servlet-mapping>
         <servlet-name>UpdateCart</servlet-name>
         <url-pattern>/UpdateCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PDF</servlet-name>
+        <url-pattern>/PDF</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

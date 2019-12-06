@@ -76,9 +76,13 @@ public class LoginServlet extends HttpServlet {
         int res;
         String nombre="";
         String apellido="";
+        LOGGER.log(Level.INFO,"cus.addCustomer(cus);  " + cus.addCustomer(cus));
+
         
         if (resp==0) {
             request.setAttribute("mensaje", "usuario no existe");
+            request.getRequestDispatcher("/page/Login.jsp").forward(request, response);
+            
         } else 
         {
             if (resp==1)   
@@ -90,6 +94,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("name", cus.getName());
                 session.setAttribute("lname", cus.getLast_name());
                 session.setAttribute("venta", 0);
+                //session.setAttribute("mesa", 0);
                 request.getRequestDispatcher("/page/IndexCustomer.jsp").forward(request, response);
                 //request.setAttribute("mensaje", "Autenticacion correcta");
                 

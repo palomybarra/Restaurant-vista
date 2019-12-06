@@ -26,12 +26,13 @@ public class Order_Command_Model{
     private int cantidad;
     private int price;
     private String description;
+    private int command_time;
 
     public Order_Command_Model() {
     }
 
     public Order_Command_Model(int id_order_command, int id_order, int id_menu, int id_customer, int person, String date, String time, int is_paid_out, int id_order_command_state, int id_restaurant_table, int id_sale_detail,
-    int cantidad) {
+    int cantidad, int command_time) {
         this.id_order_command = id_order_command;
         this.id_order = id_order;
         this.id_menu = id_menu;
@@ -44,6 +45,7 @@ public class Order_Command_Model{
         this.id_restaurant_table = id_restaurant_table;
         this.id_sale = id_sale_detail;
         this.cantidad=cantidad;
+        this.command_time=command_time;
     }
 
     public int getId_order_command() {
@@ -58,6 +60,14 @@ public class Order_Command_Model{
         return id_order;
     }
 
+    public int getCommand_time() {
+        return command_time;
+    }
+
+    public void setCommand_time(int command_time) {
+        this.command_time = command_time;
+    }
+    
     public void setId_order(int id_order) {
         this.id_order = id_order;
     }

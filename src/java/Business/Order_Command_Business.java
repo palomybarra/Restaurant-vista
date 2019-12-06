@@ -12,6 +12,17 @@ import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfDocument;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.IOException;
+
+
 
 /**
  *
@@ -33,11 +44,13 @@ public class Order_Command_Business {
     private int cantidad;
     private int price;
     private String description;
+    private int command_time;
 
     public Order_Command_Business() {
     }
 
-    public Order_Command_Business(int id_order_command, int id_order, int id_menu, int id_customer, int person, String date, String time, int is_paid_out, int id_order_command_state, int id_restaurant_table, int id_sale_detail, int cantidad) {
+    public Order_Command_Business(int id_order_command, int id_order, int id_menu, int id_customer, int person, String date, String time, int is_paid_out, int id_order_command_state, int id_restaurant_table, 
+            int id_sale_detail, int cantidad, int command_time) {
         this.id_order_command = id_order_command;
         this.id_order = id_order;
         this.id_menu = id_menu;
@@ -50,8 +63,17 @@ public class Order_Command_Business {
         this.id_restaurant_table = id_restaurant_table;
         this.id_sale = id_sale_detail;
         this.cantidad = cantidad;
+        this.command_time=command_time;
     }
 
+    public int getCommand_time() {
+        return command_time;
+    }
+
+    public void setCommand_time(int command_time) {
+        this.command_time = command_time;
+    }
+     
     public int getId_order_command() {
         return id_order_command;
     }
@@ -195,7 +217,8 @@ public class Order_Command_Business {
                     x.getId_order_command_state(),
                     x.getId_restaurant_table(),
                     x.getId_sale(),
-                    x.getCantidad());
+                    x.getCantidad(),
+                    x.getCommand_time());
 
             OrderCommandDAO dao = new OrderCommandDAO();  
             boolean sale=dao.addCommand(model);
@@ -207,6 +230,7 @@ public class Order_Command_Business {
             return false;
         }
     }
+   
     
     public ArrayList<Order_Command_Business> getCommand() {
         ArrayList<Order_Command_Business> salida = new ArrayList<>();
@@ -217,9 +241,97 @@ public class Order_Command_Business {
             bus.setCantidad(model.getCantidad());
             bus.setPrice(model.getPrice());
             bus.setId_sale(model.getId_sale());
-            bus.setDescription(model.getDescription());            
+            bus.setDescription(model.getDescription()); 
+            bus.setCommand_time(model.getCommand_time());
             salida.add(bus);
         }
         return salida;
+    }
+    public ArrayList<Order_Command_Business> getCommandPay() {
+        ArrayList<Order_Command_Business> salida = new ArrayList<>();
+        OrderCommandDAO dao = new OrderCommandDAO();
+        ArrayList<Order_Command_Model> modelo = dao.getCommandPay(this.getId_sale());
+        for (Order_Command_Model model : modelo) {
+            Order_Command_Business bus=new Order_Command_Business();
+            bus.setCantidad(model.getCantidad());
+            bus.setPrice(model.getPrice());
+            bus.setId_sale(model.getId_sale());
+            bus.setDescription(model.getDescription()); 
+            bus.setCommand_time(model.getCommand_time());
+            salida.add(bus);
+        }
+        return salida;
+    }
+    
+    public String toString()
+    {
+        return cantidad+"  "+description+" ......"+calculaTotal();
+    }
+    
+    public void pdf(ArrayList<Order_Command_Business> lista, int pago) throws FileNotFoundException, DocumentException, IOException 
+    {
+        
+        Order_Command_Business bus=new Order_Command_Business();
+        // Se crea el documento
+        Document documento = new Document();
+        
+        // El OutPutStream para el fichero donde crearemos el PDF
+        String id=lista.get(0).getId_sale()+"";      
+        //FileOutputStream ficheroPDF = new FileOutputStream(file+".pdf");
+        FileOutputStream ficheroPDF = new FileOutputStream("C:\\Users\\Public\\boleta"+id+".pdf");
+        
+        // Se asocia el documento de OutPutStream
+        PdfWriter.getInstance(documento, ficheroPDF);
+        
+        // Se abre el documento
+        documento.open();
+        
+        // Parrafo
+        Paragraph titulo = new Paragraph("Boleta "+id+" \n\n",
+                FontFactory.getFont("arial",
+                        22,
+                        Font.BOLD,
+                        BaseColor.BLUE
+                        )
+        );
+        
+        // Añadimos el titulo al documento
+        documento.add(titulo);
+        
+        // Creamos una tabla
+        PdfPTable tabla = new PdfPTable(3);
+        tabla.addCell("DESCRIPCION");
+        tabla.addCell("CANTIDAD");
+        tabla.addCell("PRECIO");       
+        
+        
+        for (Order_Command_Business al : lista) 
+        {
+            tabla.addCell(al.getDescription());
+            tabla.addCell(al.getCantidad()+"");
+            tabla.addCell(al.calculaTotal()+"");
+        }     
+                
+        // Añadimos la tabla al documento
+        documento.add(tabla);
+        String tipopago="";
+        if(pago==2)
+        {
+            tipopago="Tarjeta de debito";
+        }
+        else
+        {
+            tipopago="Tarjeta de credito";
+        }
+        
+        documento.add(new Paragraph ("Metodo de pago:"+tipopago));
+        documento.add(new Paragraph ("Total pagado :"+bus.totalFinal(lista)+""));
+        
+        // Se cierra el documento
+        documento.close();
+        String ruta="C:\\Users\\Public\\boleta" + id + ".pdf";
+        Runtime.getRuntime().exec ("rundll32 SHELL32.DLL,ShellExec_RunDLL "+ruta);
+        
+
     }
 }

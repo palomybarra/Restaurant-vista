@@ -1,17 +1,22 @@
+<%@page import="Business.Restaurant_table_Business"%>
 <%@page import="Business.Menu_Business"%>
 <%@page import="java.util.ArrayList"%>
 <div id="container">
     <header>
         <nav>
             <ul id="nav">
-                <li><a href="index.jsp" class="current"><i class="fas fa-home"></i></a></li>
-                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                
-                <li><a href="MenuServlet">Menú</a></li>
+                  <li><a href="#" class="current"><i class="fas fa-home"></i></a></li>
+                <%
+                    if(session.getAttribute("mesa")!=null){
+                    out.print("<li><a href='MenuServlet'>Menú</a></li>");}
+                    else
+                    {
+                    out.print("<li><a href='tableServlet'>Menú</a></li>");}
+                %>
                 <li><a href="GetCartServlet">Pedir</a></li>
                 <li><a href="GetCommandServlet">Carrito</a></li>
                 <li><a href="EditSessionServlet">Perfil</a></li>
+                <li><a href="Logout">Cerrar Sesion</a></li>
                 
             </ul>
         </nav>
@@ -30,7 +35,7 @@
                     //out.print("<input type=" +ch+ " name=" +ch+cont+ " value=" +al.getId_Menu()+"/>" );//sujeto a cambios
                     String x=al.getDescription();
                     x=x.replace(' ', '_');
-                    out.print("<div class='right menu-order'><a class='button' href=AddCartServlet?id=" + al.getId_Menu()+"&price="+al.getPrice()+"&desc="+x+">+</a></div>");
+                    out.print("<div class='right menu-order'><a class='button' onclick='agregar();' href=AddCartServlet?id=" + al.getId_Menu()+"&price="+al.getPrice()+"&desc="+x+">+</a></div>");
                     out.print("<img src='public/images/menu/pizza2.jpeg' class='left clear item' width='150' alt=''>");
                     out.print("<p class='left'>Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae.</p>");
                     out.print("<div class='border3'></div>");
@@ -75,6 +80,11 @@
 
 </div>
 
+        <script>
+function Agregar() {
+  alert("Agregado");
+}
+</script>
 
 
 

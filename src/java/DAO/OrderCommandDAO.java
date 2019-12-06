@@ -59,8 +59,34 @@ public class OrderCommandDAO {
                 order.setCantidad(rs.getInt("CANT"));
                 order.setPrice(rs.getInt("PRICE"));
                 order.setId_sale(rs.getInt("SALE_ID"));
+                order.setCommand_time(rs.getInt("COMMAND_TIME"));
+               LOGGER.log(Level.INFO, "TIME" + order.getCommand_time());
+
                 order.setDescription(rs.getString("DESCRIPTION"));
-                salida.add(order);  
+                salida.add(order);                  
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Problema al listar" + e.getMessage());
+        }
+        return salida;
+    }
+    public ArrayList<Order_Command_Model> getCommandPay(int id_sale) {
+        ArrayList<Order_Command_Model> salida = new ArrayList<>();
+        String query = "SELECT * FROM VIEW_COMMAND_PAY WHERE SALE_ID="+id_sale;
+        try {
+            PreparedStatement pst = DbConnection.getConnection().prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Order_Command_Model order=new Order_Command_Model();
+                order.setCantidad(rs.getInt("CANT"));
+                order.setPrice(rs.getInt("PRICE"));
+                order.setId_sale(rs.getInt("SALE_ID"));
+                order.setCommand_time(rs.getInt("COMMAND_TIME"));
+               LOGGER.log(Level.INFO, "TIME" + order.getCommand_time());
+
+                order.setDescription(rs.getString("DESCRIPTION"));
+                salida.add(order);                  
             }
 
         } catch (SQLException e) {
